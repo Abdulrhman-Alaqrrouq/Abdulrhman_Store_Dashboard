@@ -40,7 +40,7 @@ TotalProfit = TotalSales - TotalCost
 ProfitMargin = (TotalProfit / TotalSales) * 100
 SalesAverage = TotalSales / TotalQuantity
 
-df["profit"] = TotalSales - TotalCost
+df["profit"] = df["total_amount"] - df["cost"]
 
 #-------------------------------------------------------------------------------------------------------
 # Page Configuration
@@ -132,7 +132,7 @@ st.markdown("---")
 
 #sales figures prearation
 
-top5_Product_by_sales = df_filtered.groupby("product_name")["total_amount"].sum().reset_index().head().sort_values(by="total_amount", ascending=False)
+top5_Product_by_sales = df_filtered.groupby("product_name")["total_amount"].sum().reset_index().sort_values(by="total_amount", ascending=False).head()
 
 sales_monthly_trend = df_filtered.groupby(["year","month"])["total_amount"].sum().reset_index()
 
@@ -245,7 +245,7 @@ if buttons == "Sales":
 
 #Cost figures prearation
 
-top5_Product_by_cost = df_filtered.groupby("product_name")["cost"].sum().reset_index().head().sort_values(by="cost", ascending=False)
+top5_Product_by_cost = df_filtered.groupby("product_name")["cost"].sum().reset_index().sort_values(by="cost", ascending=False).head()
 
 cost_monthly_trend = df_filtered.groupby(["year","month"])["cost"].sum().reset_index()
 
@@ -356,7 +356,7 @@ if buttons == "Cost":
 #Profit figures prearation
 
 
-top5_Product_by_Profit = df_filtered.groupby("product_name")["profit"].sum().reset_index().head().sort_values(by="profit", ascending=False)
+top5_Product_by_Profit = df_filtered.groupby("product_name")["profit"].sum().reset_index().sort_values(by="profit", ascending=False).head()
 
 profit_monthly_trend = df_filtered.groupby(["year","month"])["profit"].sum().reset_index()
 
